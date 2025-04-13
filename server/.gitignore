@@ -1,0 +1,33 @@
+# Environment Variables
+.env
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Build and Production
+dist/
+build/
+
+# Temporary Files
+*.tmp
+*.swp
+*.bak
+*.orig
+
+# IDE and Editor Config
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
