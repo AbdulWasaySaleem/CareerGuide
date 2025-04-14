@@ -79,10 +79,10 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold mr-2">
-                M
+                CM
               </div>
               <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                MyLogo
+                CareerMentor
               </span>
             </Link>
           </div>

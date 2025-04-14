@@ -4,6 +4,7 @@ import { Star, StarHalf, ChevronRight, BarChart3, RefreshCw } from 'lucide-react
 import api from '../services/api';
 
 const Quiz = () => {
+  // Original state variables
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -19,6 +20,11 @@ const Quiz = () => {
   const [answeredCount, setAnsweredCount] = useState(0);
   const [interimResultShown, setInterimResultShown] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
+  
+  // New state variables for the countdown
+  const [quizReady, setQuizReady] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+  const [showCountdown, setShowCountdown] = useState(false);
 
   const QUESTIONS_BEFORE_INTERIM_RESULTS = 10;
   const COLORS = ['#4F46E5', '#06B6D4', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
@@ -30,7 +36,7 @@ const Quiz = () => {
         params: {
           difficulty,
           page,
-          limit: 10 // Fetch 5 questions at a time
+          limit: 10 // Fetch 10 questions at a time
         }
       });
       
@@ -60,6 +66,11 @@ const Quiz = () => {
       
       setLoading(false);
       setInitialLoading(false);
+      
+      // Once questions are loaded, we can show the countdown
+      if (!quizReady) {
+        setShowCountdown(true);
+      }
     } catch (error) {
       console.log("Something went wrong", error);
       setError("Failed to load quiz questions");
@@ -71,6 +82,22 @@ const Quiz = () => {
   useEffect(() => {
     fetchQuiz(1, true);
   }, [difficulty]);
+
+  // Effect for countdown timer
+  useEffect(() => {
+    let timer;
+    if (showCountdown && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (showCountdown && countdown === 0) {
+      // When countdown reaches 0, start the quiz
+      setQuizReady(true);
+      setShowCountdown(false);
+    }
+    
+    return () => clearTimeout(timer);
+  }, [countdown, showCountdown]);
 
   useEffect(() => {
     if (showResults) {
@@ -178,6 +205,9 @@ const Quiz = () => {
     setAnsweredCount(0);
     setInterimResultShown(false);
     setFadeIn(false);
+    setQuizReady(false);
+    setCountdown(3);
+    setShowCountdown(true);
     
     // Reset all field points to zero
     const resetPoints = {};
@@ -251,7 +281,7 @@ const Quiz = () => {
 
   if (initialLoading) {
     return (
-      <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg text-center">
+      <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg text-center">
         <div className="animate-pulse space-y-4">
           <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
           <div className="h-6 bg-gray-200 rounded w-full"></div>
@@ -269,7 +299,7 @@ const Quiz = () => {
 
   if (error) {
     return (
-      <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
+      <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
         <div className="text-center py-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -292,8 +322,46 @@ const Quiz = () => {
 
   if (questions.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg text-center">
+      <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg text-center">
         <p className="text-lg text-gray-600">No quiz questions available</p>
+      </div>
+    );
+  }
+
+  // Show countdown animation before questions
+  if (showCountdown) {
+    return (
+      <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg text-center">
+        <div className="py-16">
+          <div className="flex items-center justify-center">
+            <div className="relative w-40 h-40">
+              {/* Circular progress */}
+              <svg className="w-full h-full" viewBox="0 0 100 100">
+                <circle 
+                  cx="50" cy="50" r="45" 
+                  fill="none" 
+                  stroke="#EEF2FF" 
+                  strokeWidth="8"
+                />
+                <circle 
+                  cx="50" cy="50" r="45" 
+                  fill="none" 
+                  stroke="#4F46E5" 
+                  strokeWidth="8"
+                  strokeDasharray="283"
+                  strokeDashoffset={283 - (283 * ((3 - countdown) / 3))}
+                  className="transition-all duration-1000 ease-linear"
+                />
+              </svg>
+              {/* Countdown number */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-6xl font-bold text-blue-600">{countdown}</span>
+              </div>
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold mt-8 text-gray-800">Get Ready!</h2>
+          <p className="mt-2 text-gray-600">Your career path quiz is about to begin...</p>
+        </div>
       </div>
     );
   }
@@ -304,7 +372,7 @@ const Quiz = () => {
     const accuracyLevel = getAccuracyLevel();
     
     return (
-      <div className={`max-w-2xl mx-auto mt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`max-w-4xl mx-auto mt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
@@ -416,7 +484,7 @@ const Quiz = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
+    <div className="max-w-4xl mx-auto mt-10">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-5">

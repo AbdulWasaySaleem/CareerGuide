@@ -48,7 +48,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="inline-block text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-              Why CodePath Works
+              Why CareerMentor Works
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto"></div>
             <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
