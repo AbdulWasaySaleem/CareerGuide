@@ -37,7 +37,7 @@ export const addNewAssessmentQuestion = async (req, res) => {
 
 export const getAllQuestions = async (req, res) => {
   try {
-    const { difficulty = 'easy', limit = 5, page = 1 } = req.query;
+    const { difficulty = 'easy', limit = 10, page = 1 } = req.query;
 
     const limitNumber = Math.min(Math.max(parseInt(limit), 1), 20);
     const pageNumber = Math.max(parseInt(page), 1);

@@ -5,7 +5,7 @@ import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/allQuestions', protect, getAllQuestions)
+router.get('/allQuestions', getAllQuestions)
 router.post('/addNewQuestions', isAdmin ,addNewAssessmentQuestion);
 
 

@@ -47,7 +47,7 @@ export const getOneCareers = async (req, res) => {
     if (!career) {
       return res.status(404).json({ success: false, message: 'Career not found' });
     }
-    res.status(200).json({ success: true, data: career });
+    res.status(200).json({ success: true, career });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

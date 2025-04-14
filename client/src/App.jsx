@@ -7,7 +7,8 @@ import About from "./pages/About";
 import Quize from "./components/Quize";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
-import Career from "./components/Career";
+import Career from "./components/Career/Career";
+import ViewCareer from "./components/Career/ViewCareer";
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
       <BrowserRouter>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/quiz" element={<Quize/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/careers" element={<Career/>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/quiz" element={<Quize />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/careers" element={<Career />} />
+            <Route path="/careers/:id" element={<ViewCareer />} />
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
