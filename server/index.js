@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js"; // Import the database connection
 import questionRoute from "./routes/questionRoute.js"; // Import the question route
+import userRoutes from "./routes/userRoute.js";
 import { insertQuestions } from "./scripts/insertQuestion.js";
 
 dotenv.config();
@@ -19,6 +20,8 @@ app.use(cors());
 
 // Routes
 app.use("/api/questions", questionRoute);
+app.use("/api/users", userRoutes);
+
 
 //insertQuestions()
 
