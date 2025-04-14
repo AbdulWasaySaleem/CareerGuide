@@ -40,7 +40,7 @@ const SignupPage = () => {
             <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md border border-gray-100">
                 <div className="text-center mb-8">
                     <div className="h-12 w-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold mx-auto mb-4">
-                        M
+                        CM
                     </div>
                     <h1 className="text-3xl font-bold text-gray-800">Create Account</h1>
                     <p className="text-gray-600 mt-2">Join us today and get started</p>
