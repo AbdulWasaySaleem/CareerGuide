@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const CareerCard = ({ career }) => (
@@ -24,6 +24,10 @@ const CareerCard = ({ career }) => (
 );
 
 const Career = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const careers = useMemo(() => [
     {
       title: 'Web Developer',
