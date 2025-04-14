@@ -1,21 +1,36 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./config/db.js"; // Import the database connection
+import questionRoute from "./routes/questionRoute.js"; // Import the question route
+import { insertQuestions } from "./scripts/insertQuestion.js";
 
-// Load .env variables
 dotenv.config();
 
-connectDB(); // Connect to the database
+// Connect to the database
+connectDB();
 
+// Initialize express
 const app = express();
 
-// Use an environment variable for PORT
-const PORT = process.env.PORT || 3000;
+// Middleware to parse JSON requests and allow cross-origin requests
+app.use(express.json());
+app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
+// Routes
+app.use("/api/questions", questionRoute);
+
+//insertQuestions()
+
+// Health check route
+app.get("/", (req, res) => {
+  res.send("API is running...");
 });
 
+// Set the port from environment variables or default to 3000
+const PORT = process.env.PORT || 3000;
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
