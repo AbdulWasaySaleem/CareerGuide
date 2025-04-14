@@ -9,16 +9,19 @@ export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
 
     const user = await User.create({ name, email, password });
     res.status(201).json({
       message: "Signup successful",
       token: generateToken(user._id),
-      user: { id: user._id, name: user.name, email: user.email }
+      user: { id: user._id, name: user.name, email: user.email },
     });
   } catch (err) {
-    res.status(500).json({ message: "Error creating user", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error creating user", error: err.message });
   }
 };
 
@@ -33,7 +36,7 @@ export const login = async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token: generateToken(user._id),
-      user: { id: user._id, name: user.name, email: user.email }
+      user: { id: user._id, name: user.name, email: user.email },
     });
   } catch (err) {
     res.status(500).json({ message: "Login failed", error: err.message });
