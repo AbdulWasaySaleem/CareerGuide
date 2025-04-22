@@ -1,3 +1,5 @@
+
+import ResultModel from "../models/quizeResultModel.js";
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 
@@ -42,3 +44,56 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Login failed", error: err.message });
   }
 };
+
+export const saveQuizResult = async (req, res) => {
+  const { questionIds, fieldPoints, recommendedField } = req.body;
+  console.log(req.user._id)
+
+  // Ensure user is logged in
+  if (!req.user || !req.user._id) {
+    res.status(401);
+    throw new Error("You must be logged in to save your quiz result.");
+  }
+
+  // Validate basic structure
+  if (
+    !Array.isArray(questionIds) ||
+    typeof fieldPoints !== "object" ||
+    typeof recommendedField !== "string"
+  ) {
+    res.status(400);
+    throw new Error("Invalid or incomplete data submitted.");
+  }
+
+  const result = await ResultModel.create({
+    userId: req.user._id,
+    questionIds,
+    fieldPoints,
+    recommendedField,
+  });
+
+  res.status(201).json({
+    success: true,
+    data: result,
+    message: "Quiz result saved successfully.",
+  });
+}
+
+export const getQuizResult = async (req, res) => {
+  try {
+    const userId = req.user._id; // Get the user ID from the request
+    const results = await ResultModel.find({ userId }).populate("questionIds");
+
+    if (!results || results.length === 0) {
+      return res.status(404).json({ message: "No quiz results found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: results,
+      message: "Quiz results retrieved successfully.",
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Error retrieving quiz results", error: err.message });
+  }
+}

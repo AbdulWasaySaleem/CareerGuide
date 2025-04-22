@@ -10,6 +10,7 @@ import SignupPage from "./pages/Auth/SignupPage";
 import Career from "./components/Career/Career";
 import ViewCareer from "./components/Career/ViewCareer";
 import Services from "./pages/Services";
+import UserDashBoard from "./pages/DashBoard/UserDashBoard";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/careers" element={<Career />} />
             <Route path="/careers/:id" element={<ViewCareer />} />
+
+            <Route path="/profile" element={<UserDashBoard/>}/>
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
