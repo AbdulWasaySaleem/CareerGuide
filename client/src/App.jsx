@@ -9,8 +9,8 @@ import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
 import Career from "./components/Career/Career";
 import ViewCareer from "./components/Career/ViewCareer";
-import Services from "./pages/Services";
 import UserDashBoard from "./pages/DashBoard/UserDashBoard";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -21,9 +21,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/quiz" element={<Quize />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/careers" element={<Career />} />
             <Route path="/careers/:id" element={<ViewCareer />} />
+            <Route path="/contact" element={<Contact />} />
 
             <Route path="/profile" element={<UserDashBoard/>}/>
 

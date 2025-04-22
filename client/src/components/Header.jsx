@@ -99,9 +99,6 @@ const Header = () => {
               <Link to="/careers" className={inactiveLinkClass}>
                 Careers
               </Link>
-              <Link to="/services" className={inactiveLinkClass}>
-                Services
-              </Link>
               <Link to="/contact" className={inactiveLinkClass}>
                 Contact
               </Link>
