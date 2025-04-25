@@ -15,7 +15,7 @@ const Testimonials = () => {
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto"></div>
             <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
-              See how CodePath has helped professionals like you find their
+              See how CareerMentor has helped professionals like you find their
               perfect career
             </p>
           </div>
@@ -29,7 +29,7 @@ const Testimonials = () => {
               },
               {
                 quote:
-                  "CodePath helped me transition from marketing to data science with a clear learning path.",
+                  "CareerMentor helped me transition from marketing to data science with a clear learning path.",
                 name: "Sarah Chen",
                 role: "Data Scientist",
               },

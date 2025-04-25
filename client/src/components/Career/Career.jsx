@@ -52,7 +52,6 @@ const Career = () => {
     const fetchCareers = async () => {
       try {
         const response = await api.get('/career/getAllCareer');
-        console.log('Response:', response);
     
         if (response.data && Array.isArray(response.data.data)) {
           setCareers(response.data.data);

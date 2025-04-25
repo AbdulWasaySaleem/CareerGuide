@@ -11,6 +11,7 @@ import Career from "./components/Career/Career";
 import ViewCareer from "./components/Career/ViewCareer";
 import UserDashBoard from "./pages/DashBoard/UserDashBoard";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </MainLayout>
       </BrowserRouter>

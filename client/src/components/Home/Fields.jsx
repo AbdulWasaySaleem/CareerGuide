@@ -1,82 +1,64 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import api from '../../services/api'
 
 const Fields = () => {
+  const [careers, setCareers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const navigate=useNavigate()
+
+  const fetchCareers = async () => {
+    try {
+      const response = await api.get('/career/getAllCareer')
+      if (response.data.success) {
+        setCareers(response.data.data.slice(0, 6))
+      } else {
+        setError('Failed to load careers')
+      }      
+    } catch (error) {
+      console.error(error)
+      setError('Error fetching careers')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchCareers()
+  }, [])
+
   return (
-    <>
-       <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="inline-block text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-              Explore Career Paths
-            </h2>
-            <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto"></div>
-            <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
-              Discover various specializations in the tech industry and find
-              your perfect fit
-            </p>
-          </div>
+    <section className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="inline-block text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+            Explore Career Paths
+          </h2>
+          <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto"></div>
+          <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
+            Discover various specializations in the tech industry and find your perfect fit
+          </p>
+        </div>
+
+        {loading ? (
+          <div className="text-center text-gray-500">Loading careers...</div>
+        ) : error ? (
+          <div className="text-center text-red-500">{error}</div>
+        ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Web Developer",
-                icon: "🌐",
-                description:
-                  "Build responsive and interactive websites and web applications",
-                color: "from-blue-400 to-blue-600",
-              },
-              {
-                title: "Mobile App Developer",
-                icon: "📱",
-                description:
-                  "Create applications for iOS, Android, and other mobile platforms",
-                color: "from-indigo-400 to-indigo-600",
-              },
-              {
-                title: "Data Scientist",
-                icon: "📊",
-                description:
-                  "Analyze complex data and extract valuable insights",
-                color: "from-purple-400 to-purple-600",
-              },
-              {
-                title: "AI/ML Engineer",
-                icon: "🤖",
-                description:
-                  "Develop systems that can learn and make decisions",
-                color: "from-green-400 to-green-600",
-              },
-              {
-                title: "Cybersecurity Analyst",
-                icon: "🔒",
-                description:
-                  "Protect systems and networks from digital threats",
-                color: "from-red-400 to-red-600",
-              },
-              {
-                title: "Game Developer",
-                icon: "🎮",
-                description:
-                  "Create interactive experiences for various gaming platforms",
-                color: "from-yellow-400 to-yellow-600",
-              },
-            ].map((career, index) => (
-              <div key={index} className="group">
+            {careers.map((career) => (
+              <div key={career._id} className="group">
                 <div className="relative h-full bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden transform group-hover:-translate-y-2">
-                  {/* Top color accent */}
-                  <div
-                    className={`h-2 w-full bg-gradient-to-r ${career.color}`}
-                  ></div>
+                  <div className="h-2 w-full bg-gradient-to-r from-blue-400 to-blue-600"></div>
                   <div className="p-8">
                     <div className="text-4xl mb-4">{career.icon}</div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      {career.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      {career.description}
-                    </p>
-                    <Link
-                      to="/careers"
+                    <h3 className="text-xl font-semibold mb-2">{career.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{career.shortDescription}</p>
+                    <button
+                      onClick={()=>{navigate(`/careers/${career._id}`)}}
+                      type="button"
                       className="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium group"
                     >
                       Learn More
@@ -94,24 +76,23 @@ const Fields = () => {
                           d="M9 5l7 7-7 7"
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        )}
 
-          {/* Redirect button to careers */}
-          <div className="text-center">
-            <Link to="/careers">
-              <button className="mt-10 px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full hover:shadow-lg transform transition hover:-translate-y-1 hover:scale-105">
-                View All Career Paths
-              </button>
-            </Link>
-          </div>
+        <div className="text-center">
+          <Link to="/careers">
+            <button className="mt-10 px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full hover:shadow-lg transform transition hover:-translate-y-1 hover:scale-105">
+              View All Career Paths
+            </button>
+          </Link>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 

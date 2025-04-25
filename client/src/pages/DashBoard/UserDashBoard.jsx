@@ -459,8 +459,8 @@ const UserDashboard = () => {
                     <button className="flex-1 bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-indigo-700 shadow-sm hover:shadow transition flex items-center justify-center">
                       <Settings className="w-4 h-4 mr-2" /> Edit Profile
                     </button>
-                    <button className="flex-1 bg-gray-100 text-gray-700 px-4 py-2.5 rounded-lg font-medium hover:bg-gray-200 shadow-sm hover:shadow transition flex items-center justify-center">
-                      <span>Change Password</span>
+                    <button className="flex-1 bg-gray-100 text-gray-700 px-4 py-2.5 rounded-lg font-medium hover:bg-gray-200 shadow-sm hover:shadow transition flex items-center justify-center" disabled>
+                      Change Password
                     </button>
                   </div>
                 </div>

@@ -99,6 +99,12 @@ const Header = () => {
               <Link to="/careers" className={inactiveLinkClass}>
                 Careers
               </Link>
+              <Link
+              to="/quiz"
+              className={inactiveLinkClass}
+            >
+              Quiz
+            </Link>
               <Link to="/contact" className={inactiveLinkClass}>
                 Contact
               </Link>
@@ -144,13 +150,7 @@ const Header = () => {
                       <User size={16} className="mr-2 text-gray-500" />
                       Your Profile
                     </Link>
-                    <Link
-                      to="/settings"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                    >
-                      <Settings size={16} className="mr-2 text-gray-500" />
-                      Settings
-                    </Link>
+
                     <div className="border-t border-gray-100 my-1"></div>
                     <button
                       onClick={logout}
@@ -209,11 +209,18 @@ const Header = () => {
               About
             </Link>
             <Link
-              to="/services"
+              to="/careers"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
               onClick={() => setIsOpen(false)}
             >
-              Services
+              Career
+            </Link>
+            <Link
+              to="/quiz"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+              onClick={() => setIsOpen(false)}
+            >
+              Quiz
             </Link>
             <Link
               to="/contact"
@@ -246,13 +253,6 @@ const Header = () => {
                       onClick={() => setIsOpen(false)}
                     >
                       Your Profile
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Settings
                     </Link>
                     <button
                       onClick={() => {

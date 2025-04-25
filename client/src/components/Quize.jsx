@@ -34,10 +34,6 @@ const Quiz = () => {
   const [interimResultShown, setInterimResultShown] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
 
-  console.log("Quiz component rendered with questions:", questions);
-  console.log("Recommended field:", recommendedField);
-  console.log("Field points:", fieldPoints);
-
   // New state variables for the countdown
   const [quizReady, setQuizReady] = useState(false);
   const [countdown, setCountdown] = useState(3);
@@ -146,7 +142,6 @@ const Quiz = () => {
         recommendedField
       });
       
-      console.log('Quiz results saved:', response.data);
       setSaveSuccess(true);
     } catch (error) {
       console.error('Error saving quiz results:', error);
