@@ -12,6 +12,8 @@ import ViewCareer from "./components/Career/ViewCareer";
 import UserDashBoard from "./pages/DashBoard/UserDashBoard";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import TermsOfService from "./pages/TermOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -30,6 +32,9 @@ function App() {
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+
+            <Route path="/terms" element={<TermsOfService/>}/>
+            <Route path="/privacy" element={<PrivacyPolicy/>}/>
 
             <Route path="*" element={<NotFound/>}/>
           </Routes>
