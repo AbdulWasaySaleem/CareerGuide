@@ -23,9 +23,7 @@ const UserProvider = ({ children }) => {
   const logout = () => {
     // Clear auth from localStorage
     localStorage.removeItem("auth");
-    window.location.reload(); // Reload the page to reset the state
-
-    // Reset auth state
+    window.location.reload(); 
     setAuth({ user: null, token: "", role: "" });
   };
 

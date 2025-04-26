@@ -1,26 +1,30 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: [6, "Password must be at least 6 characters long"], // Minimum length of 6
+      maxlength: [20, "Password must be less than or equal to 20 characters"],
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
-
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 // Hash password before saving
 userSchema.pre("save", async function (next) {

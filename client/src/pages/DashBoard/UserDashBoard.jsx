@@ -85,10 +85,6 @@ const UserDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth");
-    navigate("/login");
-  };
 
   if (loading) {
     return (
@@ -108,7 +104,7 @@ const UserDashboard = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-indigo-700">Career Compass</h1>
+              <h1 className="text-xl font-bold text-indigo-700">Your Compass</h1>
             </div>
             
             {/* User Menu */}
@@ -123,20 +119,7 @@ const UserDashboard = () => {
                 <span className="hidden md:block font-medium">{userInfo?.name}</span>
               </button>
               
-              {showDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-gray-200">
-                  <div className="px-4 py-2 border-b border-gray-100">
-                    <p className="font-medium text-sm">{userInfo?.name}</p>
-                    <p className="text-xs text-gray-500 truncate">{userInfo?.email}</p>
-                  </div>
-                  <button onClick={() => {setActiveTab("profile"); setShowDropdown(false);}} className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    <Settings className="w-4 h-4 mr-2" /> Settings
-                  </button>
-                  <button onClick={handleLogout} className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                    <LogOut className="w-4 h-4 mr-2" /> Logout
-                  </button>
-                </div>
-              )}
+              
             </div>
           </div>
         </div>

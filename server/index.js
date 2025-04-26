@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet"; // Import helmet for security
 import connectDB from "./config/db.js"; // Import the database connection
 import questionRoute from "./routes/questionRoute.js"; // Import the question route
 import userRoutes from "./routes/userRoute.js";
@@ -16,9 +17,10 @@ connectDB();
 // Initialize express
 const app = express();
 
-// Middleware to parse JSON requests and allow cross-origin requests
+// Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(helmet()); 
 
 // Routes
 app.use("/api/questions", questionRoute);
