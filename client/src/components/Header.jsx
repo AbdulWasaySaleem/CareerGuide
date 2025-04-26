@@ -123,7 +123,7 @@ const Header = () => {
                       {user?.name?.charAt(0) || <User size={16} />}
                     </div>
                     <span className="font-medium hidden lg:block">
-                      {user?.name || "User"}
+                      {user?.name?.slice(0, 10) || "User"}
                     </span>
                     <ChevronDown
                       size={16}

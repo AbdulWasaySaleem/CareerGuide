@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BarChart, Bar, XAxis, ResponsiveContainer, Tooltip, CartesianGrid } from "recharts";
 import api from "../../services/api";
-import { Calendar, Award, User, Clock, ArrowRight, ChevronRight, LogOut, Settings, AlertCircle, Clipboard, Book, TrendingUp } from "lucide-react";
+import { Calendar, Award, User, Clock, ArrowRight, ChevronRight, Settings, AlertCircle, Clipboard, Book, TrendingUp } from "lucide-react";
 
 const UserDashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -116,7 +116,7 @@ const UserDashboard = () => {
                 <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-medium">
                   {userInfo?.name?.charAt(0).toUpperCase()}
                 </div>
-                <span className="hidden md:block font-medium">{userInfo?.name}</span>
+                <span className="hidden md:block font-medium">{userInfo?.name?.slice(0,8)}</span>
               </button>
               
               
@@ -130,7 +130,7 @@ const UserDashboard = () => {
         <div className="bg-gradient-to-r from-indigo-700 to-purple-700 rounded-2xl p-6 mb-8 text-white shadow-xl">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Welcome back, {userInfo?.name} 👋</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Welcome back, {userInfo?.name?.slice(0,8)} 👋</h2>
               <p className="opacity-90 text-sm md:text-base">Here's an overview of your progress and career recommendations</p>
             </div>
             <button 
