@@ -38,23 +38,40 @@ Welcome to the Career Guide! This platform is designed to help you explore and f
      npm install
      ```
 
-4. **Run MongoDB**:
+4. **Setup Environment Variables**:
+   - Create an `.env` file in the root of both the `client` and `server` directories and add the following environment variables:
+
+   **Client Environment Variables** (in `client/.env`):
+   ```bash
+   VITE_API_URL=http://localhost:5000/api
+   ```
+
+   **Server Environment Variables** (in `server/.env`):
+   ```bash
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+
+   Make sure to replace `your_mongodb_connection_string` with your actual MongoDB URI and `your_jwt_secret` with your desired secret key for JWT authentication.
+
+5. **Run MongoDB**:
    - Make sure MongoDB is running on your local machine or connect it to a cloud instance (like MongoDB Atlas).
 
-5. **Start the Backend**:
-   - In the `backend` directory, run:
+6. **Start the Backend**:
+   - In the `server` directory, run:
      ```bash
      npm start
      ```
 
-6. **Start the Frontend**:
-   - In the `frontend` directory, run:
+7. **Start the Frontend**:
+   - In the `client` directory, run:
      ```bash
      npm run dev
      ```
 
-7. **Access the Application**:
-   - Open your browser and access the app.
+8. **Access the Application**:
+   - Open your browser and access the app at `http://localhost:3000`.
 
 ## Technologies Used
 - **Frontend**: React.js, Tailwind CSS
@@ -63,7 +80,6 @@ Welcome to the Career Guide! This platform is designed to help you explore and f
 
 ## Contributing
 If you'd like to contribute to the project, feel free to fork the repository and submit a pull request. Any suggestions or improvements are always welcome!
-
 
 ## Contact
 For any inquiries, please feel free to reach out to 07.abdulwasayy@gmail.com.
