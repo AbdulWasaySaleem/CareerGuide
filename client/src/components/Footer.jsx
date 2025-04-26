@@ -167,7 +167,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 text-sm text-center text-gray-400 mt-2">
           Developed by{" "}
           <a
-            href="https://www.linkedin.com/in/abdul-wasay-4765b82a6/" // replace with your actual LinkedIn URL
+            href="https://github.com/AbdulWasaySaleem" // replace with your actual LinkedIn URL
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:underline"
